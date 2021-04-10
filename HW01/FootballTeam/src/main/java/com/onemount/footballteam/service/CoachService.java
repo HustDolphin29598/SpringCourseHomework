@@ -91,7 +91,7 @@ public class CoachService {
                 .collect(Collectors.toList());
 
         if (!availablePlayers.contains(playerRepository.getPLayerByNumber(playerNumber))){
-            throw new TeamException("Player already in the match or available !");
+            throw new TeamException("Player already in the match or not available !");
         }
 
         Random random = new Random();
