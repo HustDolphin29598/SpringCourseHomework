@@ -1,4 +1,4 @@
-package com.onemount.footballteam;
+package com.onemount.footballteam.model;
 
 public enum Position {
     GK,

@@ -1,11 +1,10 @@
 package com.onemount.footballteam.repository;
 
-import com.onemount.footballteam.Position;
+import com.onemount.footballteam.model.Position;
 import com.onemount.footballteam.model.Player;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -43,27 +42,34 @@ public class PlayerRepository {
         return players;
     }
 
-    public List<Player> getGKPlayer(){
-        return (List<Player>) players.stream()
-                .filter(player -> player.getPosition().equals(Position.GK))
+    public ArrayList<Player> getPlayersByPosition(Position position, List<Player> players){
+        return (ArrayList<Player>) players.stream()
+                .filter(player -> player.getPosition().equals(position))
                 .collect(Collectors.toList());
     }
 
-    public List<Player> getDFPlayer(){
-        return (List<Player>) players.stream()
-                .filter(player -> player.getPosition().equals(Position.DF))
-                .collect(Collectors.toList());
+    public List<Player> getUniquePlayersByPosition(Position position, int number, ArrayList<Player> players) {
+        ArrayList<Player> selectedPlayers = new ArrayList<>();
+        List<Player> poolOfPlayers = getPlayersByPosition(position, players);
+
+        if (number > poolOfPlayers.size()) {
+            throw new IllegalArgumentException(number + " is more than available players");
+        }
+
+        int[] indexOfPlayer = new Random().ints(0, poolOfPlayers.size()).distinct().limit(number).toArray();
+
+        for (int index : indexOfPlayer) {
+            selectedPlayers.add(poolOfPlayers.get(index));
+        }
+
+        return selectedPlayers;
     }
 
-    public List<Player> getMFPlayer(){
-        return (List<Player>) players.stream()
-                .filter(player -> player.getPosition().equals(Position.MF))
-                .collect(Collectors.toList());
-    }
-
-    public List<Player> getFWPlayer(){
-        return (List<Player>) players.stream()
-                .filter(player -> player.getPosition().equals(Position.FW))
-                .collect(Collectors.toList());
+    public Player getPLayerByNumber(int playerNumber){
+        for (Player player: players) {
+            if(player.getNum() == playerNumber)
+                return player;
+        }
+        return null;
     }
 }
