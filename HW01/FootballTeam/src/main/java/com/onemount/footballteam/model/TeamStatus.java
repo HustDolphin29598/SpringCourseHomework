@@ -5,10 +5,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class TeamAndSubstitute {
-  private Team currentTeam;
+  private Set<Player> players;
   private List<Substitute> substituteHistory;
 
   public TeamAndSubstitute(){
