@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Set;
 
 @Data
-public class TeamAndSubstitute {
-  private Set<Player> players;
+public class TeamStatus {
+  private Set<Player> currentTeam;
   private List<Substitute> substituteHistory;
 
-  public TeamAndSubstitute(){
+  public TeamStatus(){
     substituteHistory = new ArrayList<>();
   }
 }

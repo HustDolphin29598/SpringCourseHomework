@@ -2,16 +2,15 @@ package com.onemount.footballteam.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Team {
-    private String name;
-    private ArrayList<Player> players ;
-
-    public Team(String name) {
-        this.name = name;
-    }
+    private Set<Player> players ;
 }

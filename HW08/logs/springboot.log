@@ -1547,3 +1547,11 @@ java.lang.NullPointerException: null
 [DEBUG] 2021-04-25 21:05:20.415 [http-nio-8080-exec-7] HttpEntityMethodProcessor - Writing [com.onemount.crm.exception.APIError@28a78597]
 [WARN ] 2021-04-25 21:05:20.416 [http-nio-8080-exec-7] ExceptionHandlerExceptionResolver - Resolved [com.onemount.crm.exception.CRMException: New customer violates constrains]
 [DEBUG] 2021-04-25 21:05:20.416 [http-nio-8080-exec-7] DispatcherServlet - Completed 400 BAD_REQUEST
+[DEBUG] 2021-04-26 16:33:25.648 [restartedMain] RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[DEBUG] 2021-04-26 16:33:25.685 [restartedMain] RequestMappingHandlerMapping - 9 mappings in 'requestMappingHandlerMapping'
+[DEBUG] 2021-04-26 16:33:25.705 [restartedMain] SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[DEBUG] 2021-04-26 16:33:25.712 [restartedMain] ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+[DEBUG] 2021-04-26 16:44:06.389 [restartedMain] RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+[DEBUG] 2021-04-26 16:44:06.427 [restartedMain] RequestMappingHandlerMapping - 9 mappings in 'requestMappingHandlerMapping'
+[DEBUG] 2021-04-26 16:44:06.454 [restartedMain] SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+[DEBUG] 2021-04-26 16:44:06.461 [restartedMain] ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice

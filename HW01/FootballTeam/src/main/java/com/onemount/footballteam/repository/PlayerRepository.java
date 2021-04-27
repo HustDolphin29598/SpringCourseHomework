@@ -42,15 +42,15 @@ public class PlayerRepository {
         return players;
     }
 
-    public ArrayList<Player> getPlayersByPosition(Position position, List<Player> players){
+    public ArrayList<Player> getPlayersByPosition(Position position){
         return (ArrayList<Player>) players.stream()
                 .filter(player -> player.getPosition().equals(position))
                 .collect(Collectors.toList());
     }
 
-    public List<Player> getUniquePlayersByPosition(Position position, int number, ArrayList<Player> players) {
+    public List<Player> getUniquePlayersByPosition(Position position, int number) {
         ArrayList<Player> selectedPlayers = new ArrayList<>();
-        List<Player> poolOfPlayers = getPlayersByPosition(position, players);
+        List<Player> poolOfPlayers = getPlayersByPosition(position);
 
         if (number > poolOfPlayers.size()) {
             throw new IllegalArgumentException(number + " is more than available players");

@@ -1,40 +1,57 @@
 package com.onemount.footballteam.controller;
 
 import com.onemount.footballteam.exception.TeamException;
+import com.onemount.footballteam.model.Player;
 import com.onemount.footballteam.model.Position;
-import com.onemount.footballteam.model.Team;
-import com.onemount.footballteam.model.TeamAndSubstitute;
+import com.onemount.footballteam.model.TeamStatus;
 import com.onemount.footballteam.service.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
+import java.util.Set;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("")
 public class APIController {
 
     @Autowired
     CoachService coachService;
 
-    @GetMapping(value = "/team/{teamPattern}")
-    public Team chooseTeam(@PathVariable String teamPattern){
-        return coachService.chooseTeam(teamPattern);
-    }
-
-    @GetMapping(value = "team/get")
-    public Team getTeam(){
-        return coachService.getTeam();
-    }
-
-    @GetMapping(value = "/substitute/{playerNumber}/{newPosition}")
-    public TeamAndSubstitute substitutePlayer(@PathVariable int playerNumber, @PathVariable Position newPosition) {
+    @GetMapping(value = "/chooseteam/{teamPattern}")
+    public ResponseEntity<Set<Player>> chooseTeam(@PathVariable String teamPattern){
         try {
-            return coachService.substitute(playerNumber, newPosition);
-        } catch (TeamException e) {
-            e.printStackTrace();
+            return ResponseEntity.ok(coachService.chooseTeam(teamPattern));
+        } catch (TeamException ex){
+            throw ex;
         }
-        return null;
+    }
+
+    @GetMapping(value = "/team")
+    public ResponseEntity<Set<Player>> getTeam(){
+        return ResponseEntity.ok(coachService.chooseTeam("442"));
+    }
+
+    @GetMapping(value = "/teamgroup")
+    public ResponseEntity<Map<String, Set<Player>>> getTeamGroup(){
+        return ResponseEntity.ok(coachService.getTeamGroup());
+    }
+
+    @GetMapping(value = "/substitute/{playerNumber}/{position}")
+    public ResponseEntity<TeamStatus> substitutePlayer(@PathVariable String playerNumber, @PathVariable String position) {
+        try {
+            int playNum = Integer.parseInt(playerNumber);
+            for (Position p: Position.values()){
+                if(p.toString().equals(position)){
+                    return ResponseEntity.ok(coachService.substitute(playNum, p));
+                }
+            }
+            throw new TeamException("Argument type mismatch");
+        } catch (TeamException ex) {
+            throw ex;
+        } catch (NumberFormatException ex){
+            throw new TeamException("Argument type mismatch");
+        }
     }
 }
